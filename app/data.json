@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "author": { "username": "吴亦凡" },
+      "body": "我是电音之王"
+    },
+    {
+      "author": { "username": "蔡徐坤" },
+      "body": "我喜欢唱跳rap篮球"
+    },
+    {
+      "author": { "username": "易烊千玺" },
+      "body": "你保护世界我保护你"
+    }
+  ]
+}
