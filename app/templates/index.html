@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Hello, {{ user.username }}！</h1>
+<h1>Hello, <a href="/user/{{ user.username }}">{{ user.username }}</a>！</h1>
 <ul>
     {% for post in posts %}
     <div><p>
-            {{ post.author.username }} says: <b>{{ post.body }}</b>
+            <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a>says: <b>{{ post.body }}</b>
     </p></div>
     {% endfor %}
 </ul>
