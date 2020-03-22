@@ -1,19 +1,15 @@
 {% extends 'base.html' %}
-{% block content %}
-<h1>Hello, <a href="/user/{{ user.username }}">{{ user.username }}</a>！</h1>
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.post.label }} <br>
-        {{ form.post(cols=50, rows=4)|safe }} <br>
-        {% for error in form.post.errors %}
-            {% include '_error_message.html' %}
-        {% endfor %}
-    </p>
-    <p>{{ form.submit() }}</p>
-</form>
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block app_content %}
+    <h1>Hello, <a href="/user/{{ user.username }}">{{ user.username }}</a>！</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+<br>
 {% for post in posts %}
 {% include '_post.html' %}
 {% endfor %}
 {% include '_pages.html' %}
-{% endblock content %}
+{% endblock app_content %}

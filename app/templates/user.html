@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block content %}
+{% block app_content %}
 <table>
     <tr valign="center">
         <td><img src="{{ user.avatar(128) }}" alt=""></td>
@@ -28,4 +28,4 @@
     {% include '_post.html' %}
 {% endfor %}
 {% include '_pages.html' %}
-{% endblock content %}
+{% endblock app_content %}

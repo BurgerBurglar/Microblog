@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, Markup
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.urls import url_parse
 from app.models import User, Post
@@ -32,6 +32,15 @@ def index():
 def explore():
     posts = Post.query.order_by(Post.timestamp.desc())
     pagination = paginate_posts(posts, redirect_to="explore")
+    if not current_user.is_authenticated:
+        message = Markup(
+            "You haven't signed in yet. \
+            <a href='{}'>Login</a> or \
+            <a href='{}'>Sign up</a>.".format(
+                url_for("login"), 
+                url_for("register")
+        ))
+        flash(message)
     return render_template("explore.html", title="Explore", **pagination)
 
 @app.route("/register", methods=["GET", "POST"])
@@ -75,7 +84,7 @@ def logout():
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     posts = Post.query.filter_by(author=user)
-    pagination = paginate_posts(posts, redirect_to="user")
+    pagination = paginate_posts(posts, redirect_to="user", username=user.username)
     return render_template("user.html", user=user, **pagination)
 
 @app.before_request
@@ -139,7 +148,9 @@ def reset_password_request():
         if user:
             send_password_reset_email(user)
             flash("Please check your inbox and spam folder for {}".format(user.email))
-        return(redirect(url_for("login")))
+            return(redirect(url_for("login")))
+        else:
+            flash("We couldn't find any account relating to this email. Try again?")
     return render_template("reset_password_request.html", title="Reset Password",form=form)
 
 @app.route("/reset_password/<token>", methods=["GET", "POST"])
