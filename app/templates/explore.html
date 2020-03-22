@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if not current_user.is_authenticated %}
+    You haven't signed in yet. <a href="{{ url_for('login') }}">Login</a> or <a href="{{ url_for('register') }}">Sign up</a>.
+{% endif %}
+{% for post in posts %}
+    {% include '_post.html' %}
+{% endfor %}
+{% include '_pages.html' %}
+{% endblock content %}

@@ -4,7 +4,6 @@ from app import app, db
 from app.models import User, Post
 import tempfile
 
-
 class UserModelCase(unittest.TestCase):
     def setUp(self):
         app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite://'
@@ -90,9 +89,8 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(guanxiaotong_f, [guanxiaotong_p, luhan_p])
         self.assertEqual(wangyibo_f, [wangyibo_p])
 
-    
-if __name__ == "__main__":
-    unittest.main(verbosity=2)
-        
-        
+def test_all(verbosity=2):
+    unittest.main(verbosity=verbosity)
 
+if __name__ == "__main__":
+    test_all()
