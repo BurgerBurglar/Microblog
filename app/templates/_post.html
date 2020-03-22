@@ -2,6 +2,9 @@
     .table {
         margin-bottom: 0;
     }
+    .post_timestamp {
+        font-size: 80%;
+    }
 </style>
 <table class="table table-hover">
     <tr>
@@ -14,7 +17,8 @@
             <a href="{{ url_for('user', username=post.author.username) }}">
                 {{ post.author.username }}
             </a>
-            says:
+            <span class="post_timestamp">
+                {{ moment(post.timestamp).fromNow() }}</span>
             <br>
             {{ post.body }}
         </td>
