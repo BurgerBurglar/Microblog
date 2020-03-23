@@ -2,3 +2,4 @@ __pycache__/
 tutorial/
 .flaskenv
 venv/
+niubi.py

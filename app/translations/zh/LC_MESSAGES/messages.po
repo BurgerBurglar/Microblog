@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-03-22 17:47-0500\n"
+"POT-Creation-Date: 2020-03-22 22:22-0500\n"
 "PO-Revision-Date: 2020-03-22 16:07-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -30,7 +30,7 @@ msgstr "请重制你的 Microblog 密码"
 msgid "Username"
 msgstr "用户名"
 
-#: app/forms.py:10 app/forms.py:51
+#: app/forms.py:10 app/forms.py:52
 msgid "Email"
 msgstr "邮箱"
 
@@ -38,7 +38,7 @@ msgstr "邮箱"
 msgid "Password"
 msgstr "密码"
 
-#: app/forms.py:12 app/forms.py:56
+#: app/forms.py:12 app/forms.py:57
 msgid "Repeat Password"
 msgstr "重复密码"
 
@@ -70,7 +70,7 @@ msgstr "新用户名"
 msgid "About me"
 msgstr "个人简介"
 
-#: app/forms.py:34 app/forms.py:48
+#: app/forms.py:34 app/forms.py:49
 msgid "Submit"
 msgstr "提交"
 
@@ -82,11 +82,11 @@ msgstr "用户名已存在，请选择其他用户名。"
 msgid "Say something"
 msgstr "说点什么"
 
-#: app/forms.py:52 app/forms.py:57 app/templates/reset_password_request.html:4
+#: app/forms.py:53 app/forms.py:58 app/templates/reset_password_request.html:4
 msgid "Reset Password"
 msgstr "重置密码"
 
-#: app/forms.py:55
+#: app/forms.py:56
 msgid "New Password"
 msgstr "新密码"
 
@@ -99,7 +99,9 @@ msgstr "发送成功"
 msgid ""
 "You haven't signed in yet. <a href='%(login_url)s'>Login</a> or <a "
 "href='%(register_url)s'>Sign up</a>."
-msgstr "你还没有登录呢，请 <a href='%(login_url)s'>登录</a> 或 <a href='%(register_url)s'>注册</a>。"
+msgstr ""
+"你还没有登录呢，请 <a href='%(login_url)s'>登录</a> 或 <a "
+"href='%(register_url)s'>注册</a>。"
 
 #: app/templates/_pages.html:10
 msgid "Newer posts"
@@ -118,7 +120,7 @@ msgstr "首页"
 msgid "Explore"
 msgstr "广场"
 
-#: app/templates/base.html:30
+#: app/templates/base.html:30 app/templates/login.html:5
 msgid "Login"
 msgstr "登录"
 
@@ -198,5 +200,8 @@ msgstr "我们已经通知了工作人员，非常抱歉。"
 #~ "You haven't signed in yet.             "
 #~ "<a href='%(login_url)s'>Login</a> or             <a"
 #~ " href='%(register_url)s'>Sign up</a>."
+#~ msgstr ""
+
+#~ msgid "Sign up"
 #~ msgstr ""
 

@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_babel import _, lazy_gettext as _l
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Length
+from wtforms.validators import (
+    DataRequired, Email, EqualTo, ValidationError, Length)
 from wtforms.widgets import TextArea
 from app.models import User
 
@@ -44,7 +45,7 @@ class EditProfileForm(FlaskForm):
                 raise ValidationError(_("Username already exists. Please use a different username."))
 
 class PostForm(FlaskForm):
-    post = StringField(_l("Say something"), validators=[DataRequired(), Length(0, 140)], \
+    post = StringField(_l("Say something"), validators=[DataRequired(), Length(0, 140)], 
                        widget=TextArea(), render_kw={"class": "post-field"})
     submit = SubmitField(_l("Submit"))
 

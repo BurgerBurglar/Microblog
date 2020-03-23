@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
 import jwt
+from jwt.exceptions import DecodeError
 
 followers = db.Table(
     "followers",
@@ -62,7 +63,8 @@ class User(UserMixin, db.Model):
 
     def followed_post(self, n=None):
         own = self.post
-        followed = Post.query.join(followers, followers.c.followed_id == Post.user_id) \
+        followed = Post.query \
+                       .join(followers, followers.c.followed_id == Post.user_id) \
                        .filter(followers.c.follower_id == self.id)
         return followed.union(own) \
                        .order_by(Post.timestamp.desc()) \
@@ -78,8 +80,12 @@ class User(UserMixin, db.Model):
     @staticmethod
     def verify_reset_password_token(token):
         try:
-            id = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])["reset_password"]
-        except:
+            id = jwt.decode(
+                token, 
+                app.config["SECRET_KEY"], 
+                algorithms=["HS256"]
+            )["reset_password"]
+        except DecodeError:
             return
         return User.query.get(id)
 

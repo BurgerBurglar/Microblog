@@ -7,9 +7,6 @@ from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_babel import Babel, lazy_gettext as _l
-# import app.log_errors
-from logging.handlers import SMTPHandler, RotatingFileHandler
-import os
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -22,9 +19,6 @@ login = LoginManager(app)
 login.login_message = _l("Please login to access this page.")
 login.login_view = "login"
 mail = Mail(app)
-
-if not app.debug:
-    import logging
 
 @babel.localeselector
 def get_locale():

@@ -36,7 +36,7 @@ def explore():
     if not current_user.is_authenticated:
         message = _(
             "You haven't signed in yet. <a href='%(login_url)s'>Login</a> or <a href='%(register_url)s'>Sign up</a>.",
-            login_url=url_for("login"), 
+            login_url=url_for("login"),
             register_url=url_for("register")
         )
         markup = Markup(message)
@@ -137,7 +137,7 @@ def unfollow(username):
     db.session.commit()
     flash("You've successfully unfollowed {}.".format(username))
     return(redirect(url_for("user", username=username)))
-    
+
 @app.route("/reset_password_request", methods=["GET", "POST"])
 def reset_password_request():
     if current_user.is_authenticated:
@@ -152,7 +152,7 @@ def reset_password_request():
             return(redirect(url_for("login")))
         else:
             flash("We couldn't find any account relating to this email. Try again?")
-    return render_template("reset_password_request.html", title="Reset Password",form=form)
+    return render_template("reset_password_request.html", title="Reset Password", form=form)
 
 @app.route("/reset_password/<token>", methods=["GET", "POST"])
 def reset_password(token):
@@ -168,4 +168,3 @@ def reset_password(token):
         flash("Your password has been reset successfully.")
         return redirect("login")
     return render_template("reset_password.html", form=form)
-    
