@@ -14,3 +14,5 @@ class Config(object):
     ADMINS = ['Shuo Tian']
 
     POSTS_PER_PAGE = 20
+
+    LANGUAGES = ["en", "zh"]

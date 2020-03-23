@@ -1,5 +1,6 @@
-from flask import render_template, flash, redirect, url_for, request, Markup
+from flask import render_template, flash, g, redirect, url_for, request, Markup
 from flask_login import login_user, logout_user, current_user, login_required
+from flask_babel import _, lazy_gettext as _l, get_locale
 from werkzeug.urls import url_parse
 from app.models import User, Post
 from app import app, db
@@ -24,7 +25,7 @@ def index():
         post = Post(body=form.post.data, author=current_user)
         db.session.add(post)
         db.session.commit()
-        flash("Your post is now live!")
+        flash(_l("Your post is now live!"))
         return redirect(url_for("index"))
     return render_template("index.html", title="HOME", user=current_user, form=form, **pagination)
 
@@ -33,14 +34,13 @@ def explore():
     posts = Post.query.order_by(Post.timestamp.desc())
     pagination = paginate_posts(posts, redirect_to="explore")
     if not current_user.is_authenticated:
-        message = Markup(
-            "You haven't signed in yet. \
-            <a href='{}'>Login</a> or \
-            <a href='{}'>Sign up</a>.".format(
-                url_for("login"), 
-                url_for("register")
-        ))
-        flash(message)
+        message = _(
+            "You haven't signed in yet. <a href='%(login_url)s'>Login</a> or <a href='%(register_url)s'>Sign up</a>.",
+            login_url=url_for("login"), 
+            register_url=url_for("register")
+        )
+        markup = Markup(message)
+        flash(markup)
     return render_template("explore.html", title="Explore", **pagination)
 
 @app.route("/register", methods=["GET", "POST"])
@@ -92,6 +92,7 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+    g.locale = str(get_locale())
 
 @app.route("/edit_profiles", methods=["GET", "POST"])
 def edit_profile():

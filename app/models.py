@@ -17,6 +17,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    gender = db.Column(db.String(1), index=True)
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     post = db.relationship("Post", backref="author", lazy="dynamic")
@@ -38,7 +39,15 @@ class User(UserMixin, db.Model):
 
     def avatar(self, size):
         digest = md5(self.email.encode("utf-8")).hexdigest()
+        # adroable avatar API is down
         return "https://api.adorable.io/avatars/{}/{}.png".format(size, digest)
+        # gender_convert = {
+        #     "M": "male",
+        #     "F": "female",
+        #     "B": "bottts"
+        # }
+        # return "https://avatars.dicebear.com/v2/{}/{}.svg?options[mood][]=happy" \
+        #        .format(gender_convert[self.gender], digest)
 
     def is_following(self, other):
         return self in other.followers.all()

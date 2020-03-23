@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
 {% block app_content %}
-    <h1>Hello, <a href="/user/{{ user.username }}">{{ user.username }}</a>！</h1>
+    <h1>{{_("Hello")}}, <a href="/user/{{ user.username }}">{{ user.username }}</a>！</h1>
     <div class="row">
         <div class="col-md-4">
             {{ wtf.quick_form(form) }}
@@ -13,3 +13,12 @@
 {% endfor %}
 {% include '_pages.html' %}
 {% endblock app_content %}
+{% block styles %}
+    {{ super() }}
+    <style>
+        textarea.form-control {
+            height: 7em;
+            width: 30em;
+        }
+    </style>
+{% endblock styles %}

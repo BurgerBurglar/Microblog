@@ -8,9 +8,9 @@
             {{ wtf.quick_form(form) }}
             <br>
             <div>
-                <a href="{{ url_for('register') }}">Sign up for Microblog</a>
+                <a href="{{ url_for('register') }}">{{_("Sign up for Microblog")}}</a>
                 · 
-                <a href="{{ url_for('reset_password_request') }}">Forgot your password?</a>
+                <a href="{{ url_for('reset_password_request') }}">{{_("Forgot your password?")}}</a>
             </div>
         </div>
     </div>
