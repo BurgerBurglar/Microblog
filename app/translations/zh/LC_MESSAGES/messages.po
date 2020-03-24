@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-03-23 23:08-0500\n"
+"POT-Creation-Date: 2020-03-24 11:39-0500\n"
 "PO-Revision-Date: 2020-03-22 16:07-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -26,11 +26,15 @@ msgstr "请登录后查看此页面"
 msgid "Reset your password on Microblog"
 msgstr "请重制你的 Microblog 密码"
 
+#: app/email.py:30 app/templates/base.html:10
+msgid "Welcome to Microblog"
+msgstr "欢迎来 Mircroblog"
+
 #: app/forms.py:10 app/forms.py:27
 msgid "Username"
 msgstr "用户名"
 
-#: app/forms.py:11 app/forms.py:53
+#: app/forms.py:11 app/forms.py:54
 msgid "Email"
 msgstr "邮箱"
 
@@ -38,11 +42,11 @@ msgstr "邮箱"
 msgid "Password"
 msgstr "密码"
 
-#: app/forms.py:13 app/forms.py:58
+#: app/forms.py:13 app/forms.py:59
 msgid "Repeat Password"
 msgstr "重复密码"
 
-#: app/forms.py:14 app/routes.py:67
+#: app/forms.py:14 app/routes.py:66
 msgid "Register"
 msgstr "注册"
 
@@ -67,27 +71,43 @@ msgid "New username"
 msgstr "新用户名"
 
 #: app/forms.py:34
+msgid "Gender"
+msgstr "性别"
+
+#: app/forms.py:34
+msgid "Male"
+msgstr "男"
+
+#: app/forms.py:34
+msgid "Female"
+msgstr "女"
+
+#: app/forms.py:34
+msgid "Bot"
+msgstr "机器人"
+
+#: app/forms.py:35
 msgid "About me"
 msgstr "个人简介"
 
-#: app/forms.py:35 app/forms.py:50
+#: app/forms.py:36 app/forms.py:51
 msgid "Submit"
 msgstr "提交"
 
-#: app/forms.py:45
+#: app/forms.py:46
 msgid "Username already exists. Please use a different username."
 msgstr "用户名已存在，请选择其他用户名。"
 
-#: app/forms.py:48
+#: app/forms.py:49
 msgid "Say something"
 msgstr "说点什么"
 
-#: app/forms.py:54 app/forms.py:59 app/routes.py:163
+#: app/forms.py:55 app/forms.py:60 app/routes.py:168
 #: app/templates/reset_password_request.html:4
 msgid "Reset Password"
 msgstr "重置密码"
 
-#: app/forms.py:57
+#: app/forms.py:58
 msgid "New Password"
 msgstr "新密码"
 
@@ -113,9 +133,27 @@ msgstr ""
 msgid "Explore"
 msgstr "广场"
 
-#: app/routes.py:117 app/templates/edit_profile.html:4
+#: app/routes.py:80
+#, python-format
+msgid "You haven't verified yet. <a href='%(url)s'>Verify now.</a>"
+msgstr "你的账号还没有验证呢，<a href='%(url)s'>现在就去？</a>"
+
+#: app/routes.py:122 app/templates/edit_profile.html:4
 msgid "Edit Profile"
 msgstr "编辑个人资料"
+
+#: app/routes.py:191
+msgid "You're already verified. Let's go!"
+msgstr "你已经验证过了，到处逛逛吧。"
+
+#: app/routes.py:194
+#, python-format
+msgid "Please check the inbox of %(email)s."
+msgstr "请检查 %(email)s 的收件箱"
+
+#: app/routes.py:204
+msgid "Your reset link is either invalid or expired."
+msgstr ""
 
 #: app/translate.py:12
 msgid "Translation unavailable right now - service not configured"
@@ -157,10 +195,6 @@ msgstr "删除"
 msgid "Error: Could not contact server."
 msgstr "翻译失败：无法连接至翻译服务器"
 
-#: app/templates/base.html:10
-msgid "Welcome to Microblog"
-msgstr "欢迎来 Mircroblog"
-
 #: app/templates/base.html:40 app/templates/login.html:5
 msgid "Login"
 msgstr "登录"
@@ -185,7 +219,7 @@ msgstr "发现更大的世界"
 msgid "Hello"
 msgstr "你好"
 
-#: app/templates/login.html:11
+#: app/templates/login.html:12
 msgid "Sign up for Microblog"
 msgstr "注册 Microblog"
 
@@ -197,27 +231,27 @@ msgstr "忘记密码？"
 msgid "Reset your password"
 msgstr "重置密码"
 
-#: app/templates/user.html:9
+#: app/templates/user.html:18
 msgid "Last seen on:"
 msgstr "最近活跃"
 
-#: app/templates/user.html:10
+#: app/templates/user.html:19
 msgid "followers"
 msgstr "粉丝"
 
-#: app/templates/user.html:10
+#: app/templates/user.html:19
 msgid "following"
 msgstr "关注"
 
-#: app/templates/user.html:12
+#: app/templates/user.html:21
 msgid "Edit your profile"
 msgstr "编辑个人资料"
 
-#: app/templates/user.html:15
+#: app/templates/user.html:24
 msgid "Follow"
 msgstr "关注"
 
-#: app/templates/user.html:17
+#: app/templates/user.html:26
 msgid "Unfollow"
 msgstr "取消关注"
 

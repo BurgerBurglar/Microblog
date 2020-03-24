@@ -10,7 +10,7 @@ from app import app, db, get_locale
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, \
                       PostForm, ResetPasswordRequestForm, ResetPasswordForm
 from app.helper import paginate_posts
-from app.email import send_password_reset_email
+from app.email import send_password_reset_email, send_register_confirmation_email
 from app.translate import translate
 from datetime import datetime
 
@@ -61,9 +61,8 @@ def register():
         user.language = g.locale
         db.session.add(user)
         db.session.commit()
-        flash("Hello {}, welcome to Microblog!".format(user.username))
-        login_user(user)
-        return redirect(url_for("index"))
+        confirm_registration_request(user.username)
+        return redirect(url_for("login"))
     return render_template("register.html", title=_("Register"), form=form)
 
 @app.route("/login", methods=["GET", "POST"])
@@ -76,6 +75,12 @@ def login():
         if user is None or not user.check_password(form.password.data):
             flash("Invalid username or password")
             return render_template("login.html", form=form)
+        if not user.is_verified:
+            message = _("You haven't verified yet. <a href='%(url)s'>Verify now.</a>", 
+                        url=url_for("confirm_registration_request", username=user.username))
+            markup = Markup(message)
+            flash(markup)
+            return redirect(url_for("login"))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get("next")
         if not next_page or url_parse(next_page).netloc != "":  # don't redirect to another domain
@@ -166,7 +171,7 @@ def reset_password_request():
 def reset_password(token):
     if current_user.is_authenticated:
         logout_user()
-    user = User.verify_reset_password_token(token)
+    user = User.verify_hash_token(token)
     if not user:
         return redirect(url_for("index"))
     form = ResetPasswordForm()
@@ -176,6 +181,32 @@ def reset_password(token):
         flash("Your password has been reset successfully.")
         return redirect("login")
     return render_template("reset_password.html", form=form)
+
+@app.route("/confirm_registration_request/<username>")
+def confirm_registration_request(username):
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return render_template("errors/404.html"), 404
+    if user.is_verified:
+        flash(_("You're already verified. Let's go!"))
+        return redirect(url_for("homepage"))
+    send_register_confirmation_email(user)
+    flash(_("Please check the inbox of %(email)s.", email=user.email))
+    logout_user()
+    return redirect(url_for("login"))
+
+@app.route("/confirm_registration/<token>")
+def confirm_registration(token):
+    if current_user.is_authenticated:
+        logout_user()
+    user = User.verify_hash_token(token)
+    if not user:
+        flash(_("Your reset link is either invalid or expired."))
+        return redirect(url_for("login"))
+    user.is_verified = True
+    db.session.commit()
+    flash("Hello {}, welcome to Microblog!".format(user.username))
+    return redirect(url_for("login"))
 
 @app.route("/language/<language>")
 def set_language(language):

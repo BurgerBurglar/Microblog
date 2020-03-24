@@ -21,13 +21,17 @@ def send_password_reset_email(recipient):
         "recipients": [recipient.email],
         "html_body": render_template("email/reset_password.html", \
                                      user=recipient, \
-                                     token=recipient.get_reset_password_token())
+                                     token=recipient.get_hash_token())
     }
     send_email(**email_data)
 
-if __name__ == "__main__":
-    # send_email("test", ("Shuo Tian", "robbiefields1996@gmail.com"),
-    #            ["tianshuo1996@outlook.com"], "test")
-    u = User.query.filter_by(username="田硕").first()
-    if u:
-        send_password_reset_email(u)
+def send_register_confirmation_email(recipient):
+    email_data = {
+        "subject": _("Welcome to Microblog"),
+        "sender": ("Microblog team", "no-reply@mircroblog.com"),
+        "recipients": [recipient.email],
+        "html_body": render_template("email/confim_registration.html", \
+                                     user=recipient, \
+                                     token=recipient.get_hash_token())
+    }
+    send_email(**email_data)

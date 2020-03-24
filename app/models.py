@@ -18,7 +18,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    gender = db.Column(db.String(1), index=True)
+    gender = db.Column(db.String(1), index=True, default="B")
+    is_verified = db.Column(db.Boolean, nullable=False, default=False)
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     post = db.relationship("Post", backref="author", lazy="dynamic")
@@ -71,7 +72,7 @@ class User(UserMixin, db.Model):
                        .order_by(Post.timestamp.desc()) \
                        .limit(n)
 
-    def get_reset_password_token(self, expires_in=600):
+    def get_hash_token(self, expires_in=600):
         return jwt.encode(
             {"reset_password": self.id, "exp": time() + expires_in}, 
             app.config["SECRET_KEY"],
@@ -79,7 +80,7 @@ class User(UserMixin, db.Model):
         ).decode("utf-8")
 
     @staticmethod
-    def verify_reset_password_token(token):
+    def verify_hash_token(token):
         try:
             id = jwt.decode(
                 token, 

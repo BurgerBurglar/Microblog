@@ -4,7 +4,16 @@
     <tr>
         <td width="128"><img src="{{ user.avatar(128) }}"></td>
         <td>
-            <h1>{{ user.username }}</h1>
+            <h1>
+                {{ user.username }} 
+                {% if user.gender == "M" %}
+                    <span class="gender gender-male"><i class="fa fa-mars"></i></span>
+                {% elif user.gender == "F" %}
+                    <span class="gender gender-female"><i class="fa fa-venus"></i></span>
+                {% else %}
+                    <span class="gender gender-bot"><i class="fa fa-robot"></i></span>
+                {% endif %}
+            </h1>
             {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
             {% if user.last_seen %}<p>{{_("Last seen on:")}} {{ moment(user.last_seen).format("L LT") }}</p>{% endif %}
             <p>{{ user.followers.count() }} {{_("followers")}}, {{ user.followed.count() }} {{_("following")}}.</p>
@@ -26,3 +35,7 @@
 {% endfor %}
 {% include '_pages.html' %}
 {% endblock app_content %}
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock styles %}

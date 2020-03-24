@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_babel import _, lazy_gettext as _l
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from wtforms.validators import (
     DataRequired, Email, EqualTo, ValidationError, Length)
 from wtforms.widgets import TextArea
@@ -30,7 +30,8 @@ class LoginForm(FlaskForm):
     submit = SubmitField(_l("Sign In"))
 
 class EditProfileForm(FlaskForm):
-    username = StringField(_l("New username"), validators=[Length(0, 60)])
+    username = StringField(_l("New username"), validators=[Length(0, 60)], render_kw={'disabled': True})
+    gender = SelectField(_l("Gender"), choices=[('M', _l("Male")), ('F', _l('Female')), ('B', _l('Bot'))])
     about_me = StringField(_l("About me"), validators=[Length(0, 140)], widget=TextArea())
     submit = SubmitField(_l("Submit"))
 

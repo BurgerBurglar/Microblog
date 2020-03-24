@@ -1,0 +1,11 @@
+<p>Dear {{ user.username }},</p>
+<p>
+    Welcome to Microblog!
+    <a href="{{ url_for('confirm_registration', token=token, _external=True) }}">
+        click here
+    </a> to confirm your registration.
+</p>
+<p>This email will only be valid for 10 minutes. Do not share this link with anyone else.</p>
+<p>If you have not signed up for Microblog simply ignore this message.</p>
+<p>Sincerely,</p>
+<p>The Microblog Team</p>

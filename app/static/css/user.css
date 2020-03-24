@@ -1,0 +1,12 @@
+.gender {
+    font-size: medium;
+}
+.gender.gender-male {
+    color: dodgerblue;
+}
+.gender.gender-female {
+    color: hotpink;
+}
+.gender.gender-bot {
+    color: orange
+}

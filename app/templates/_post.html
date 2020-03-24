@@ -26,11 +26,19 @@
             {% endif %}
             <br>
             <ul class="text-muted post-options list-inline">
-                <li><a href="#"><i class="material-icons md-12">reply</i> {{ _("Forward") }}</a></li>
-                <li><a href="#"><i class="material-icons md-12">comment</i> {{ _("Comment") }}</a></li>
-                <li><a href="#"><i class="material-icons md-12">thumb_up</i> {{ _("Like") }}</a></li>
+                <li class="option-diabled"><a href="#" title="{{ _('This doensn\'t work for now') }}">
+                    <i class="material-icons md-12">reply</i> {{ _("Forward") }}
+                </a></li>
+                <li class="option-diabled"><a href="#" title="{{ _('This doensn\'t work for now') }}">
+                    <i class="material-icons md-12">comment</i> {{ _("Comment") }}
+                </a></li>
+                <li class="option-diabled"><a href="#" title="{{ _('This doensn\'t work for now') }}">
+                    <i class="material-icons md-12">thumb_up</i> {{ _("Like") }}
+                </a></li>
                 {% if current_user == post.author or current_user.is_admin %}
-                    <li><a href="#"><i class="material-icons md-12">delete</i> {{ _("Delete") }}</a></li>
+                    <li class="option-diabled"><a href="#" title="{{ _('This doensn\'t work for now') }}">
+                        <i class="material-icons md-12">delete</i> {{ _("Delete") }}
+                    </a></li>
                 {% endif %}
             </ul>
 
