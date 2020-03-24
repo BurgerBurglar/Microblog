@@ -1,0 +1,21 @@
+.container {
+  width: auto;
+  max-width: 800px;
+  padding: 0 15px;
+}
+.container.navbar-container {
+  max-width: 1300px;
+}
+footer div span.text-muted ul li a {
+  font-size: smaller;
+  color: gray
+}
+.navbar .navbar-brand {
+  padding-top: 12px;
+}
+.img-responsive {
+  height: auto;
+  width: auto;
+  max-height: 30px;
+  max-width: 45px;
+}

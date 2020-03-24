@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-03-22 22:22-0500\n"
+"POT-Creation-Date: 2020-03-23 23:08-0500\n"
 "PO-Revision-Date: 2020-03-22 16:07-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: app/__init__.py:22
+#: app/__init__.py:19
 msgid "Please login to access this page."
 msgstr "请登录后查看此页面"
 
@@ -26,75 +26,81 @@ msgstr "请登录后查看此页面"
 msgid "Reset your password on Microblog"
 msgstr "请重制你的 Microblog 密码"
 
-#: app/forms.py:9 app/forms.py:26
+#: app/forms.py:10 app/forms.py:27
 msgid "Username"
 msgstr "用户名"
 
-#: app/forms.py:10 app/forms.py:52
+#: app/forms.py:11 app/forms.py:53
 msgid "Email"
 msgstr "邮箱"
 
-#: app/forms.py:11 app/forms.py:27
+#: app/forms.py:12 app/forms.py:28
 msgid "Password"
 msgstr "密码"
 
-#: app/forms.py:12 app/forms.py:57
+#: app/forms.py:13 app/forms.py:58
 msgid "Repeat Password"
 msgstr "重复密码"
 
-#: app/forms.py:13
+#: app/forms.py:14 app/routes.py:67
 msgid "Register"
 msgstr "注册"
 
-#: app/forms.py:18
+#: app/forms.py:19
 msgid "Please use a different username."
 msgstr "请换一个用户名"
 
-#: app/forms.py:23
+#: app/forms.py:24
 msgid "Please use an email address."
 msgstr "请使用正确的邮箱地址"
 
-#: app/forms.py:28
+#: app/forms.py:29
 msgid "Remember Me"
 msgstr "记住我"
 
-#: app/forms.py:29
+#: app/forms.py:30
 msgid "Sign In"
 msgstr "登录"
 
-#: app/forms.py:32
+#: app/forms.py:33
 msgid "New username"
 msgstr "新用户名"
 
-#: app/forms.py:33
+#: app/forms.py:34
 msgid "About me"
 msgstr "个人简介"
 
-#: app/forms.py:34 app/forms.py:49
+#: app/forms.py:35 app/forms.py:50
 msgid "Submit"
 msgstr "提交"
 
-#: app/forms.py:44
+#: app/forms.py:45
 msgid "Username already exists. Please use a different username."
 msgstr "用户名已存在，请选择其他用户名。"
 
-#: app/forms.py:47
+#: app/forms.py:48
 msgid "Say something"
 msgstr "说点什么"
 
-#: app/forms.py:53 app/forms.py:58 app/templates/reset_password_request.html:4
+#: app/forms.py:54 app/forms.py:59 app/routes.py:163
+#: app/templates/reset_password_request.html:4
 msgid "Reset Password"
 msgstr "重置密码"
 
-#: app/forms.py:56
+#: app/forms.py:57
 msgid "New Password"
 msgstr "新密码"
 
-#: app/routes.py:28
+#: app/routes.py:35
 msgid "Your post is now live!"
 msgstr "发送成功"
 
-#: app/routes.py:40
+#: app/routes.py:37 app/templates/base.html:35 app/templates/errors/404.html:5
+#: app/templates/errors/500.html:5
+msgid "Home"
+msgstr "首页"
+
+#: app/routes.py:47
 #, python-format
 msgid ""
 "You haven't signed in yet. <a href='%(login_url)s'>Login</a> or <a "
@@ -102,6 +108,22 @@ msgid ""
 msgstr ""
 "你还没有登录呢，请 <a href='%(login_url)s'>登录</a> 或 <a "
 "href='%(register_url)s'>注册</a>。"
+
+#: app/routes.py:51 app/templates/base.html:36
+msgid "Explore"
+msgstr "广场"
+
+#: app/routes.py:117 app/templates/edit_profile.html:4
+msgid "Edit Profile"
+msgstr "编辑个人资料"
+
+#: app/translate.py:12
+msgid "Translation unavailable right now - service not configured"
+msgstr "翻译失败：翻译服务器没有设置好"
+
+#: app/translate.py:19
+msgid "Translation unavailable right now - service failed"
+msgstr "翻译失败：翻译服务器失效了"
 
 #: app/templates/_pages.html:10
 msgid "Newer posts"
@@ -111,34 +133,49 @@ msgstr "新微博"
 msgid "Older posts"
 msgstr "旧微博"
 
-#: app/templates/base.html:25 app/templates/errors/404.html:5
-#: app/templates/errors/500.html:5
-msgid "Home"
-msgstr "首页"
+#: app/templates/_post.html:22
+msgid "Translate"
+msgstr "翻译"
 
-#: app/templates/base.html:26
-msgid "Explore"
-msgstr "广场"
+#: app/templates/_post.html:29
+msgid "Forward"
+msgstr "转发"
 
-#: app/templates/base.html:30 app/templates/login.html:5
+#: app/templates/_post.html:30
+msgid "Comment"
+msgstr "评论"
+
+#: app/templates/_post.html:31
+msgid "Like"
+msgstr "赞"
+
+#: app/templates/_post.html:33
+msgid "Delete"
+msgstr "删除"
+
+#: app/templates/_post.html:51
+msgid "Error: Could not contact server."
+msgstr "翻译失败：无法连接至翻译服务器"
+
+#: app/templates/base.html:10
+msgid "Welcome to Microblog"
+msgstr "欢迎来 Mircroblog"
+
+#: app/templates/base.html:40 app/templates/login.html:5
 msgid "Login"
 msgstr "登录"
 
-#: app/templates/base.html:31 app/templates/register.html:4
+#: app/templates/base.html:41 app/templates/register.html:4
 msgid "Sign Up"
 msgstr "注册"
 
-#: app/templates/base.html:33
+#: app/templates/base.html:43
 msgid "Profile"
 msgstr "我"
 
-#: app/templates/base.html:34
+#: app/templates/base.html:44
 msgid "Logout"
 msgstr "退出登录"
-
-#: app/templates/edit_profile.html:4
-msgid "Edit Profile"
-msgstr "编辑个人资料"
 
 #: app/templates/explore.html:3
 msgid "Explore a larger world"

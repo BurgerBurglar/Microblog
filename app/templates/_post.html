@@ -12,8 +12,46 @@
             <span class="post_timestamp">
                 {{ moment(post.timestamp).fromNow() }}</span>
             <br>
-            {{ post.body }}
+            <span id="post{{ post.id }}">{{ post.body }}</span>
+            {% if post.language and post.language[:2] != g.locale[:2] %}
+            {# only compare language code #}
+                {% if post.language %}
+                    <br>
+                    <span class="translate-button" id="translate{{ post.id }}">
+                        <a href="javascript:translate('#post{{ post.id }}', '#translate{{ post.id }}', '{{ post.language[:2] }}', '{{ g.locale[:2] }}');" >
+                            <i class="material-icons md-12">g_translate</i> {{ _("Translate") }}
+                        </a>
+                    </span>
+                {% endif %}
+            {% endif %}
+            <br>
+            <ul class="text-muted post-options list-inline">
+                <li><a href="#"><i class="material-icons md-12">reply</i> {{ _("Forward") }}</a></li>
+                <li><a href="#"><i class="material-icons md-12">comment</i> {{ _("Comment") }}</a></li>
+                <li><a href="#"><i class="material-icons md-12">thumb_up</i> {{ _("Like") }}</a></li>
+                {% if current_user == post.author or current_user.is_admin %}
+                    <li><a href="#"><i class="material-icons md-12">delete</i> {{ _("Delete") }}</a></li>
+                {% endif %}
+            </ul>
+
         </td>
     </tr>
 </table>
-<link rel="stylesheet" type="text/css" href="static/css/posts.css"/>
+{% block scripts %}
+    <script>
+        function translate(sourceElem, destElem, sourceLang, destLang) {
+            $(destElem).html('<img src="{{ url_for("static", filename="pics/loading.gif") }}">');
+            $.post('/translate', {
+                text: $(sourceElem).text(),
+                source_language: sourceLang,
+                dest_language: destLang
+            }).done(function(response) {
+                $(destElem).text(response['text'])
+            }).fail(function() {
+                $(destElem).text("{{ _('Error: Could not contact server.') }}");
+            });
+        }
+    </script>
+{% endblock scripts %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/posts.css')}}"/>

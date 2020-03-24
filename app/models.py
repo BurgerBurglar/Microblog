@@ -23,6 +23,7 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     post = db.relationship("Post", backref="author", lazy="dynamic")
     is_admin = db.Column(db.Boolean(), default=False)
+    language = db.Column(db.String(5), index=True)
     followed = db.relationship(
         "User",
         secondary=followers,
@@ -95,6 +96,7 @@ class User(UserMixin, db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(280))
+    language = db.Column(db.String(5))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 

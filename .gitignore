@@ -3,3 +3,4 @@ tutorial/
 .flaskenv
 venv/
 niubi.py
+microblog-darwin-x64/

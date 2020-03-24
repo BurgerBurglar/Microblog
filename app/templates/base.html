@@ -1,16 +1,20 @@
 {% extends 'bootstrap/base.html' %}
+{% block head %}
+    {{ super() }}
+    <link rel="icon" href="{{ url_for('static', filename='pics/logo-small.ico') }}">
+{% endblock head %}
 {% block title %}
     {% if title %}
     {{ title }} - Microblog
     {% else %}
-    Welcome to Microblog
+    {{ _("Welcome to Microblog") }}
     {% endif %}
 {% endblock title %}
 
 {% block navbar %}
     <nav class="navbar navbar-inverse"></nav>
     <nav class="navbar navbar-inverse navbar-fixed-top bg-light">
-        <div class="container">
+        <div class="container navbar-container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
                         data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -19,7 +23,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url_for('index') }}">Microblog</a>
+                <ul>
+                    <a class="navbar-brand" href="{{ url_for('index') }}">
+                        <img class="img-responsive" src="{{ url_for('static', filename='pics/logo-medium.ico') }}" 
+                             alt="Microblog">
+                    </a>
+                </ul>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -54,18 +63,27 @@
         {% block app_content %}
         {% endblock app_content %}
     </div>
+    <footer class="footer">
+        <div class="container">
+          <span class="text-muted text-center">
+                <ul class="list-inline">
+                    <li><a href="{{ url_for('set_language', language='zh_CN')}}">简体中文</a></li>
+                    <li><a href="{{ url_for('set_language', language='en_US')}}">English</a></li>
+                </ul>
+          </span>
+        </div>
+    </footer>
+
 {% endblock content %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/sticky-footer.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock styles %}
 
 {% block scripts %}
     {{ super() }}
     {{ moment.include_moment() }}
-    <script type="text/javascript">
-        var language;
-        if (window.navigator.languages) {
-            language = window.navigator.languages[0];
-        } else {
-            language = window.navigator.userLanguage || window.navigator.language;
-        }
-        moment.locale(language)
-    </script>
+    {{ moment.locale(g.locale ) }}
 {% endblock scripts %}

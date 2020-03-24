@@ -2,3 +2,9 @@ textarea.form-control {
     height: 7em;
     width: 30em;
 }
+label.control-label[for~="post"] {
+    font-size: larger;
+}
+.btn#submit {
+    font-size: small;
+}
