@@ -30,7 +30,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField(_l("Sign In"))
 
 class EditProfileForm(FlaskForm):
-    username = StringField(_l("New username"), validators=[Length(0, 60)], render_kw={'disabled': True})
+    username = StringField(_l("New username"), validators=[Length(0, 60)], render_kw={'readonly': True})
     gender = SelectField(_l("Gender"), choices=[('M', _l("Male")), ('F', _l('Female')), ('B', _l('Bot'))])
     about_me = StringField(_l("About me"), validators=[Length(0, 140)], widget=TextArea())
     submit = SubmitField(_l("Submit"))

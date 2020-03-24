@@ -113,12 +113,14 @@ def edit_profile():
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
+        current_user.gender = form.gender.data
         db.session.commit()
         flash("Your update has been saved!")
         return(redirect(url_for("index")))
     elif request.method == "GET":
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
+        form.gender.data = current_user.gender
     return render_template("edit_profile.html", title=_("Edit Profile"), form=form)
 
 @app.route("/follow/<username>")

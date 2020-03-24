@@ -1,10 +1,10 @@
 .container {
   width: auto;
-  max-width: 800px;
+  max-width: 1000px;
   padding: 0 15px;
 }
 .container.navbar-container {
-  max-width: 1300px;
+  max-width: 1100px;
 }
 footer div span.text-muted ul li a {
   font-size: smaller;

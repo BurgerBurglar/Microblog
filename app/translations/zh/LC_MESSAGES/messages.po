@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-03-24 11:39-0500\n"
+"POT-Creation-Date: 2020-03-24 13:57-0500\n"
 "PO-Revision-Date: 2020-03-22 16:07-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -153,7 +153,7 @@ msgstr "请检查 %(email)s 的收件箱"
 
 #: app/routes.py:204
 msgid "Your reset link is either invalid or expired."
-msgstr ""
+msgstr "你的链接错误或已失效"
 
 #: app/translate.py:12
 msgid "Translation unavailable right now - service not configured"
@@ -175,23 +175,28 @@ msgstr "旧微博"
 msgid "Translate"
 msgstr "翻译"
 
-#: app/templates/_post.html:29
+#: app/templates/_post.html:29 app/templates/_post.html:32
+#: app/templates/_post.html:35 app/templates/_post.html:39
+msgid "This doensn't work for now"
+msgstr "这个功能现在还不能用"
+
+#: app/templates/_post.html:30
 msgid "Forward"
 msgstr "转发"
 
-#: app/templates/_post.html:30
+#: app/templates/_post.html:33
 msgid "Comment"
 msgstr "评论"
 
-#: app/templates/_post.html:31
+#: app/templates/_post.html:36
 msgid "Like"
 msgstr "赞"
 
-#: app/templates/_post.html:33
+#: app/templates/_post.html:40
 msgid "Delete"
 msgstr "删除"
 
-#: app/templates/_post.html:51
+#: app/templates/_post.html:59
 msgid "Error: Could not contact server."
 msgstr "翻译失败：无法连接至翻译服务器"
 
