@@ -22,7 +22,7 @@ class UserModelCase(unittest.TestCase):
     def test_avatar(self):
         u = User(username="鹿晗", email="luhan@gmail.com")
         self.assertEqual(
-            u.avatar(128),
+            u.get_avatar(128),
             "https://api.adorable.io/avatars/128/2bd2a01cc29163dff5f6d776f1bc36d6.png"
         )
 

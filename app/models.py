@@ -18,6 +18,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    avatar = db.Column(db.String(400))
     gender = db.Column(db.String(1), index=True, default="B")
     is_verified = db.Column(db.Boolean, nullable=False, default=False)
     about_me = db.Column(db.String(140))
@@ -40,17 +41,20 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def avatar(self, size):
-        digest = md5(self.email.encode("utf-8")).hexdigest()
-        # adroable avatar API is down
-        return "https://api.adorable.io/avatars/{}/{}.png".format(size, digest)
-        # gender_convert = {
-        #     "M": "male",
-        #     "F": "female",
-        #     "B": "bottts"
-        # }
-        # return "https://avatars.dicebear.com/v2/{}/{}.svg?options[mood][]=happy" \
-        #        .format(gender_convert[self.gender], digest)
+    def get_avatar(self, size=128):
+        if not self.avatar:
+            digest = md5(self.email.encode("utf-8")).hexdigest()
+            # adroable avatar API is down
+            return "https://api.adorable.io/avatars/{}/{}.png".format(size, digest)
+            # gender_convert = {
+            #     "M": "male",
+            #     "F": "female",
+            #     "B": "bottts"
+            # }
+            # return "https://avatars.dicebear.com/v2/{}/{}.svg?options[mood][]=happy" \
+            #        .format(gender_convert[self.gender], digest)
+        else:
+            return self.avatar
 
     def is_following(self, other):
         return self in other.followers.all()

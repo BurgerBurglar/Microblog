@@ -2,7 +2,7 @@
 {% block app_content %}
 <table class="table table-hover">
     <tr>
-        <td width="128"><img src="{{ user.avatar(128) }}"></td>
+        <td width="128"><img src="{{ user.get_avatar(128) }}"></td>
         <td>
             <h1>
                 {{ user.username }} 

@@ -224,3 +224,8 @@ def translate_text():
     return jsonify({'text': translate(request.form['text'],
                                       request.form['source_language'],
                                       request.form['dest_language'])})
+
+@login_required
+@app.route("/avatar", methods=["GET", "POST"])
+def change_avatar():
+    return render_template("avatar.html", user=current_user)

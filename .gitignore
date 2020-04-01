@@ -4,3 +4,4 @@ tutorial/
 venv/
 niubi.py
 microblog-darwin-x64/
+.vscode/settings.json
