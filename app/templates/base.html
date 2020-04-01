@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <ul>
-                    <a class="navbar-brand" href="{{ url_for('index') }}">
+                    <a class="navbar-brand" href="{{ url_for('main.index') }}">
                         <img class="img-responsive" src="{{ url_for('static', filename='pics/logo-medium.ico') }}" 
                              alt="Microblog">
                     </a>
@@ -32,16 +32,16 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('homepage') }}">{{ _("Home") }}</a></li>
-                    <li><a href="{{ url_for('explore') }}">{{ _("Explore") }}</a></li>
+                    <li><a href="{{ url_for('main.homepage') }}">{{ _("Home") }}</a></li>
+                    <li><a href="{{ url_for('main.explore') }}">{{ _("Explore") }}</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_anonymous %}
-                    <li><a href="{{ url_for('login') }}">{{ _("Login") }}</a></li>
-                    <li><a href="{{ url_for('register') }}">{{ _("Sign Up") }}</a></li>
+                    <li><a href="{{ url_for('auth.login') }}">{{ _("Login") }}</a></li>
+                    <li><a href="{{ url_for('auth.register') }}">{{ _("Sign Up") }}</a></li>
                     {% else %}
-                    <li><a href="{{ url_for('user', username=current_user.username) }}">{{ _("Profile")}}</a></li>
-                    <li><a href="{{ url_for('logout') }}">{{ _("Logout") }}</a></li>
+                    <li><a href="{{ url_for('main.user', username=current_user.username) }}">{{ _("Profile")}}</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">{{ _("Logout") }}</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -67,8 +67,8 @@
         <div class="container">
           <span class="text-muted text-center">
                 <ul class="list-inline">
-                    <li><a href="{{ url_for('set_language', language='zh_CN')}}">简体中文</a></li>
-                    <li><a href="{{ url_for('set_language', language='en_US')}}">English</a></li>
+                    <li><a href="{{ url_for('main.set_language', language='zh_CN')}}">简体中文</a></li>
+                    <li><a href="{{ url_for('main.set_language', language='en_US')}}">English</a></li>
                 </ul>
           </span>
         </div>

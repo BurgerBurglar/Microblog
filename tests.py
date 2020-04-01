@@ -1,17 +1,26 @@
 from datetime import datetime, timedelta
 import unittest
-from app import app, db
+from app import create_app, db
 from app.models import User, Post
-import tempfile
+from config import Config
+
+
+class TestConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
+
 
 class UserModelCase(unittest.TestCase):
     def setUp(self):
-        app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite://'
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push()
         db.create_all()
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+        self.app_context.pop()
 
     def test_password_hash(self):
         u = User(username="肖战")
@@ -80,7 +89,7 @@ class UserModelCase(unittest.TestCase):
         luhan.follow(guanxiaotong)
         db.session.commit()
 
-        xiaozhan_f = xiaozhan.followed_post().all() 
+        xiaozhan_f = xiaozhan.followed_post().all()
         luhan_f = luhan.followed_post().all()
         guanxiaotong_f = guanxiaotong.followed_post().all()
         wangyibo_f = wangyibo.followed_post().all()
@@ -89,8 +98,10 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(guanxiaotong_f, [guanxiaotong_p, luhan_p])
         self.assertEqual(wangyibo_f, [wangyibo_p])
 
+
 def test_all(verbosity=2):
     unittest.main(verbosity=verbosity)
+
 
 if __name__ == "__main__":
     test_all()

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-03-24 13:57-0500\n"
+"POT-Creation-Date: 2020-03-31 23:50-0500\n"
 "PO-Revision-Date: 2020-03-22 16:07-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -18,109 +18,149 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: app/__init__.py:19
+#: app/__init__.py:20
 msgid "Please login to access this page."
 msgstr "请登录后查看此页面"
 
-#: app/email.py:19
+#: app/translate.py:13
+msgid "Translation unavailable right now - service not configured"
+msgstr "翻译失败：翻译服务器没有设置好"
+
+#: app/translate.py:21
+msgid "Translation unavailable right now - service failed"
+msgstr "翻译失败：翻译服务器失效了"
+
+#: app/auth/email.py:8
 msgid "Reset your password on Microblog"
 msgstr "请重制你的 Microblog 密码"
 
-#: app/email.py:30 app/templates/base.html:10
+#: app/auth/email.py:20 app/templates/base.html:10
 msgid "Welcome to Microblog"
 msgstr "欢迎来 Mircroblog"
 
-#: app/forms.py:10 app/forms.py:27
+#: app/auth/forms.py:9 app/auth/forms.py:27
 msgid "Username"
 msgstr "用户名"
 
-#: app/forms.py:11 app/forms.py:54
+#: app/auth/forms.py:10 app/auth/forms.py:34
 msgid "Email"
 msgstr "邮箱"
 
-#: app/forms.py:12 app/forms.py:28
+#: app/auth/forms.py:11 app/auth/forms.py:28
 msgid "Password"
 msgstr "密码"
 
-#: app/forms.py:13 app/forms.py:59
+#: app/auth/forms.py:12 app/auth/forms.py:40
 msgid "Repeat Password"
 msgstr "重复密码"
 
-#: app/forms.py:14 app/routes.py:66
+#: app/auth/forms.py:13 app/auth/routes.py:33
 msgid "Register"
 msgstr "注册"
 
-#: app/forms.py:19
+#: app/auth/forms.py:18
 msgid "Please use a different username."
 msgstr "请换一个用户名"
 
-#: app/forms.py:24
+#: app/auth/forms.py:23
 msgid "Please use an email address."
 msgstr "请使用正确的邮箱地址"
 
-#: app/forms.py:29
+#: app/auth/forms.py:29
 msgid "Remember Me"
 msgstr "记住我"
 
-#: app/forms.py:30
+#: app/auth/forms.py:30
 msgid "Sign In"
 msgstr "登录"
 
-#: app/forms.py:33
-msgid "New username"
-msgstr "新用户名"
-
-#: app/forms.py:34
-msgid "Gender"
-msgstr "性别"
-
-#: app/forms.py:34
-msgid "Male"
-msgstr "男"
-
-#: app/forms.py:34
-msgid "Female"
-msgstr "女"
-
-#: app/forms.py:34
-msgid "Bot"
-msgstr "机器人"
-
-#: app/forms.py:35
-msgid "About me"
-msgstr "个人简介"
-
-#: app/forms.py:36 app/forms.py:51
-msgid "Submit"
-msgstr "提交"
-
-#: app/forms.py:46
-msgid "Username already exists. Please use a different username."
-msgstr "用户名已存在，请选择其他用户名。"
-
-#: app/forms.py:49
-msgid "Say something"
-msgstr "说点什么"
-
-#: app/forms.py:55 app/forms.py:60 app/routes.py:168
+#: app/auth/forms.py:35 app/auth/forms.py:41 app/auth/routes.py:84
 #: app/templates/reset_password_request.html:4
 msgid "Reset Password"
 msgstr "重置密码"
 
-#: app/forms.py:58
+#: app/auth/forms.py:39
 msgid "New Password"
 msgstr "新密码"
 
-#: app/routes.py:35
+#: app/auth/routes.py:48
+#, python-format
+msgid "You haven't verified yet. <a href='%(url)s'>Verify now.</a>"
+msgstr "你的账号还没有验证呢，<a href='%(url)s'>现在就去？</a>"
+
+#: app/auth/routes.py:78
+#, python-format
+msgid "Please check your inbox and spam folder for %(email)s"
+msgstr "请查看 %(email)s 的收件箱和垃圾信箱"
+
+#: app/auth/routes.py:82
+msgid "We couldn't find any account relating to this email. Try again?"
+msgstr "没找到这个邮箱对应的账号。再试试？"
+
+#: app/auth/routes.py:109
+msgid "You're already verified. Let's go!"
+msgstr "你已经验证过了，到处逛逛吧。"
+
+#: app/auth/routes.py:112
+#, python-format
+msgid "Please check the inbox of %(email)s."
+msgstr "请检查 %(email)s 的收件箱"
+
+#: app/auth/routes.py:123
+msgid "Your reset link is either invalid or expired."
+msgstr "你的链接错误或已失效"
+
+#: app/auth/routes.py:127
+#, python-format
+msgid "Hello %(username)s, welcome to Microblog!"
+msgstr "你好 %(username)s。欢迎来到 Mircroblog!"
+
+#: app/main/forms.py:10
+msgid "New username"
+msgstr "新用户名"
+
+#: app/main/forms.py:11
+msgid "Gender"
+msgstr "性别"
+
+#: app/main/forms.py:11
+msgid "Male"
+msgstr "男"
+
+#: app/main/forms.py:11
+msgid "Female"
+msgstr "女"
+
+#: app/main/forms.py:11
+msgid "Bot"
+msgstr "机器人"
+
+#: app/main/forms.py:12
+msgid "About me"
+msgstr "个人简介"
+
+#: app/main/forms.py:13 app/main/forms.py:29
+msgid "Submit"
+msgstr "提交"
+
+#: app/main/forms.py:23
+msgid "Username already exists. Please use a different username."
+msgstr "用户名已存在，请选择其他用户名。"
+
+#: app/main/forms.py:27
+msgid "Say something"
+msgstr "说点什么"
+
+#: app/main/routes.py:37
 msgid "Your post is now live!"
 msgstr "发送成功"
 
-#: app/routes.py:37 app/templates/base.html:35 app/templates/errors/404.html:5
-#: app/templates/errors/500.html:5
+#: app/main/routes.py:39 app/templates/base.html:35
+#: app/templates/errors/404.html:5 app/templates/errors/500.html:5
 msgid "Home"
 msgstr "首页"
 
-#: app/routes.py:47
+#: app/main/routes.py:52
 #, python-format
 msgid ""
 "You haven't signed in yet. <a href='%(login_url)s'>Login</a> or <a "
@@ -129,39 +169,13 @@ msgstr ""
 "你还没有登录呢，请 <a href='%(login_url)s'>登录</a> 或 <a "
 "href='%(register_url)s'>注册</a>。"
 
-#: app/routes.py:51 app/templates/base.html:36
+#: app/main/routes.py:56 app/templates/base.html:36
 msgid "Explore"
 msgstr "广场"
 
-#: app/routes.py:80
-#, python-format
-msgid "You haven't verified yet. <a href='%(url)s'>Verify now.</a>"
-msgstr "你的账号还没有验证呢，<a href='%(url)s'>现在就去？</a>"
-
-#: app/routes.py:122 app/templates/edit_profile.html:4
+#: app/main/routes.py:93 app/templates/edit_profile.html:4
 msgid "Edit Profile"
 msgstr "编辑个人资料"
-
-#: app/routes.py:191
-msgid "You're already verified. Let's go!"
-msgstr "你已经验证过了，到处逛逛吧。"
-
-#: app/routes.py:194
-#, python-format
-msgid "Please check the inbox of %(email)s."
-msgstr "请检查 %(email)s 的收件箱"
-
-#: app/routes.py:204
-msgid "Your reset link is either invalid or expired."
-msgstr "你的链接错误或已失效"
-
-#: app/translate.py:12
-msgid "Translation unavailable right now - service not configured"
-msgstr "翻译失败：翻译服务器没有设置好"
-
-#: app/translate.py:19
-msgid "Translation unavailable right now - service failed"
-msgstr "翻译失败：翻译服务器失效了"
 
 #: app/templates/_pages.html:10
 msgid "Newer posts"

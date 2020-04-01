@@ -1,4 +1,4 @@
-from app import db, login, app
+from app import db, login
 from datetime import datetime
 from time import time
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,12 +6,14 @@ from flask_login import UserMixin
 from hashlib import md5
 import jwt
 from jwt.exceptions import DecodeError
+from flask import current_app
 
 followers = db.Table(
     "followers",
     db.Column("follower_id", db.Integer, db.ForeignKey("user.id")),
     db.Column("followed_id", db.Integer, db.ForeignKey("user.id"))
 )
+
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -78,8 +80,8 @@ class User(UserMixin, db.Model):
 
     def get_hash_token(self, expires_in=600):
         return jwt.encode(
-            {"reset_password": self.id, "exp": time() + expires_in}, 
-            app.config["SECRET_KEY"],
+            {"reset_password": self.id, "exp": time() + expires_in},
+            current_app.config["SECRET_KEY"],
             algorithm='HS256'
         ).decode("utf-8")
 
@@ -87,8 +89,8 @@ class User(UserMixin, db.Model):
     def verify_hash_token(token):
         try:
             id = jwt.decode(
-                token, 
-                app.config["SECRET_KEY"], 
+                token,
+                current_app.config["SECRET_KEY"],
                 algorithms=["HS256"]
             )["reset_password"]
         except DecodeError:
@@ -97,6 +99,7 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return "<User {}>".format(self.username)
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -107,6 +110,7 @@ class Post(db.Model):
 
     def __repr__(self):
         return "<Post {}>".format(self.body)
+
 
 @login.user_loader
 def load_user(id):

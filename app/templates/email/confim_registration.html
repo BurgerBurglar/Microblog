@@ -1,7 +1,7 @@
 <p>Dear {{ user.username }},</p>
 <p>
     Welcome to Microblog!
-    <a href="{{ url_for('confirm_registration', token=token, _external=True) }}">
+    <a href="{{ url_for('auth.confirm_registration', token=token, _external=True) }}">
         click here
     </a> to confirm your registration.
 </p>
