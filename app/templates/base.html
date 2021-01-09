@@ -1,90 +1,95 @@
 {% extends 'bootstrap/base.html' %}
 {% block head %}
-    {{ super() }}
-    <link rel="icon" href="{{ url_for('static', filename='pics/logo-small.ico') }}">
+{{ super() }}
+<link rel="icon" href="{{ url_for('static', filename='pics/logo-small.ico') }}">
 {% endblock head %}
 {% block title %}
-    {% if title %}
-    {{ title }} - Microblog
-    {% else %}
-    {{ _("Welcome to Microblog") }}
-    {% endif %}
+{% if title %}
+{{ title }} - Microblog
+{% else %}
+{{ _("Welcome to Microblog") }}
+{% endif %}
 {% endblock title %}
 
 {% block navbar %}
-    <nav class="navbar navbar-inverse"></nav>
-    <nav class="navbar navbar-inverse navbar-fixed-top bg-light">
-        <div class="container navbar-container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <ul>
-                    <a class="navbar-brand" href="{{ url_for('main.index') }}">
-                        <img class="img-responsive" src="{{ url_for('static', filename='pics/logo-medium.ico') }}" 
-                             alt="Microblog">
-                    </a>
-                </ul>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('main.homepage') }}">{{ _("Home") }}</a></li>
-                    <li><a href="{{ url_for('main.explore') }}">{{ _("Explore") }}</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    {% if current_user.is_anonymous %}
-                    <li><a href="{{ url_for('auth.login') }}">{{ _("Login") }}</a></li>
-                    <li><a href="{{ url_for('auth.register') }}">{{ _("Sign Up") }}</a></li>
-                    {% else %}
-                    <li><a href="{{ url_for('main.user', username=current_user.username) }}">{{ _("Profile")}}</a></li>
-                    <li><a href="{{ url_for('auth.logout') }}">{{ _("Logout") }}</a></li>
-                    {% endif %}
-                </ul>
-            </div>
+<nav class="navbar navbar-inverse"></nav>
+<nav class="navbar navbar-inverse navbar-fixed-top bg-light">
+    <div class="container navbar-container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <ul>
+                <a class="navbar-brand" href="{{ url_for('main.index') }}">
+                    <img class="img-responsive" src="{{ url_for('static', filename='pics/logo-medium.ico') }}"
+                        alt="Microblog">
+                </a>
+            </ul>
         </div>
-    </nav>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('main.homepage') }}">{{ _("Home") }}</a></li>
+                <li><a href="{{ url_for('main.explore') }}">{{ _("Explore") }}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_anonymous %}
+                <li><a href="{{ url_for('auth.login') }}">{{ _("Login") }}</a></li>
+                <li><a href="{{ url_for('auth.register') }}">{{ _("Sign Up") }}</a></li>
+                {% else %}
+                <li><a href="{{ url_for('main.user', username=current_user.username) }}">{{ _("Profile")}}</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">{{ _("Logout") }}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
 {% endblock navbar %}
 
 {% block content %}
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
         {% for message in messages %}
-            <div class="alert alert-info" role="alert">{{ message }}</div>
-        {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        {% block app_content %}
-        {% endblock app_content %}
-    </div>
-    <footer class="footer">
-        <div class="container">
-          <span class="text-muted text-center">
-                <ul class="list-inline">
-                    <li><a href="{{ url_for('main.set_language', language='zh_CN')}}">简体中文</a></li>
-                    <li><a href="{{ url_for('main.set_language', language='en_US')}}">English</a></li>
-                </ul>
-          </span>
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            {{ message }}
         </div>
-    </footer>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block app_content %}
+    {% endblock app_content %}
+</div>
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted text-center">
+            <ul class="list-inline">
+                <li><a href="{{ url_for('main.set_language', language='zh_CN')}}">简体中文</a></li>
+                <li><a href="{{ url_for('main.set_language', language='en_US')}}">English</a></li>
+            </ul>
+        </span>
+    </div>
+</footer>
 
 {% endblock content %}
 
 {% block styles %}
-    {{ super() }}
-    <link rel="stylesheet" type="text/css" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/sticky-footer.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{{ super() }}
+<link rel="stylesheet" type="text/css"
+    href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/sticky-footer.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 {% endblock styles %}
 
 {% block scripts %}
-    {{ super() }}
-    {{ moment.include_moment() }}
-    {{ moment.locale(g.locale ) }}
+{{ super() }}
+{{ moment.include_moment() }}
+{{ moment.locale(g.locale ) }}
 {% endblock scripts %}

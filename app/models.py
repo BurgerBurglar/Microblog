@@ -47,7 +47,7 @@ class User(UserMixin, db.Model):
         if not self.avatar:
             digest = md5(self.email.encode("utf-8")).hexdigest()
             # adroable avatar API is down
-            return "https://api.adorable.io/avatars/{}/{}.png".format(size, digest)
+            return "https://www.gravatar.com/avatar/{}?d=identicon&s={}.".format(digest, size)
             # gender_convert = {
             #     "M": "male",
             #     "F": "female",

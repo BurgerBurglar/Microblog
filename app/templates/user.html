@@ -2,40 +2,40 @@
 {% block app_content %}
 <table class="table table-hover">
     <tr>
-        <td width="128"><img src="{{ user.get_avatar(128) }}"></td>
+        <td width="128"><img src="{{ user.get_avatar(128) }}" alt="{{ user.username }}"></td>
         <td>
             <h1>
-                {{ user.username }} 
+                {{ user.username }}
                 {% if user.gender == "M" %}
-                    <span class="gender gender-male"><i class="fa fa-mars"></i></span>
+                <span class="gender gender-male"><i class="fa fa-mars"></i></span>
                 {% elif user.gender == "F" %}
-                    <span class="gender gender-female"><i class="fa fa-venus"></i></span>
+                <span class="gender gender-female"><i class="fa fa-venus"></i></span>
                 {% else %}
-                    <span class="gender gender-bot"><i class="fa fa-robot"></i></span>
+                <span class="gender gender-bot"><i class="fa fa-robot"></i></span>
                 {% endif %}
             </h1>
             {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
             {% if user.last_seen %}<p>{{_("Last seen on:")}} {{ moment(user.last_seen).format("L LT") }}</p>{% endif %}
             <p>{{ user.followers.count() }} {{_("followers")}}, {{ user.followed.count() }} {{_("following")}}.</p>
             {% if user == current_user %}
-                <p><a href="{{ url_for('main.edit_profile') }}">{{_("Edit your profile")}}</a></p>
+            <p><a href="{{ url_for('main.edit_profile') }}">{{_("Edit your profile")}}</a></p>
             {% elif current_user.is_authenticated %}
-                {% if not current_user.is_following(user) %}
-                    <p><a href="{{ url_for('main.follow', username=user.username) }}">{{_("Follow")}}</a></p>
-                {% else %}
-                    <p><a href="{{ url_for('main.unfollow', username=user.username) }}">{{_("Unfollow")}}</a></p>
-                {% endif %}
+            {% if not current_user.is_following(user) %}
+            <p><a href="{{ url_for('main.follow', username=user.username) }}">{{_("Follow")}}</a></p>
+            {% else %}
+            <p><a href="{{ url_for('main.unfollow', username=user.username) }}">{{_("Unfollow")}}</a></p>
+            {% endif %}
             {% endif %}
         </td>
     </tr>
 </table>
 <hr>
 {% for post in posts %}
-    {% include '_post.html' %}
+{% include '_post.html' %}
 {% endfor %}
 {% include '_pages.html' %}
 {% endblock app_content %}
 {% block styles %}
-    {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
 {% endblock styles %}
