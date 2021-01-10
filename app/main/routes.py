@@ -6,8 +6,8 @@ from flask_babel import _, lazy_gettext as _l
 from guess_language import guess_language
 from app import db, get_locale
 from . import bp
-from app.models import User, Post
-from .forms import EditProfileForm, PostForm
+from app.models import User, Post, Message, Notification
+from .forms import EditProfileForm, PostForm, MessageForm
 from .helper import paginate_posts
 from app.translate import translate
 from datetime import datetime
@@ -152,3 +152,43 @@ def translate_text():
 @bp.route("/avatar", methods=["GET", "POST"])
 def change_avatar():
     return render_template("avatar.html", user=current_user)
+
+
+@login_required
+@bp.route("/send_message/<recipient>", methods=["GET", "POST"])
+def send_message(recipient):
+    user = User.query.filter_by(username=recipient).first_or_404()
+    form = MessageForm()
+    if form.validate_on_submit():
+        msg = Message(author=current_user, recipient=user, body=form.message.data)
+        db.session.add(msg)
+        user.add_notification("unread_message_count", user.new_messages())
+        db.session.commit()
+        flash(_("Your message has been sent."))
+        return redirect(url_for("main.user", username=recipient))
+    return render_template("send_messages.html", title=_("Send Message"), form=form, recipient=recipient)
+
+
+@login_required
+@bp.route("/messages")
+def messages():
+    current_user.last_message_read_time = datetime.utcnow()
+    current_user.add_notification("unread_message_count", 0)
+    db.session.commit()
+    messages = current_user.messages_received.order_by(Message.timestamp.desc())
+    pagination = paginate_posts(messages, redirect_to="main.messages", paginate_item="messages")
+    return render_template("messages.html", **pagination)
+
+
+@login_required
+@bp.route("/notifications")
+def notifications():
+    since = request.args.get("since", 0.0, type=float)
+    notifications = current_user.notifications \
+        .filter(Notification.timestamp > since) \
+        .order_by(Notification.timestamp.asc())
+    return jsonify([{
+        "name": n.name,
+        "data": n.get_data(),
+        "timestamp": n.timestamp
+    } for n in notifications])

@@ -28,7 +28,7 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     bootstrap.init_app(app)
-    migrate.init_app(app)
+    migrate.init_app(app, db)
     moment.init_app(app)
     babel.init_app(app)
     login.init_app(app)

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_babel import _, lazy_gettext as _l
-from wtforms import StringField, SubmitField, SelectField
+from wtforms import StringField, SubmitField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError, Length
 from wtforms.widgets import TextArea
 from app.models import User
@@ -26,4 +26,9 @@ class EditProfileForm(FlaskForm):
 class PostForm(FlaskForm):
     post = StringField(_l("Say something"), validators=[DataRequired(), Length(0, 140)],
                        widget=TextArea(), render_kw={"class": "post-field"})
+    submit = SubmitField(_l("Submit"))
+
+
+class MessageForm(FlaskForm):
+    message = TextAreaField(_l("Message"), validators=[DataRequired(), Length(min=0, max=140)])
     submit = SubmitField(_l("Submit"))

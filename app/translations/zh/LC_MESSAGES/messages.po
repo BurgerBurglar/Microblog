@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-03-31 23:50-0500\n"
+"POT-Creation-Date: 2021-01-09 21:11-0600\n"
 "PO-Revision-Date: 2020-03-22 16:07-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -34,7 +34,7 @@ msgstr "翻译失败：翻译服务器失效了"
 msgid "Reset your password on Microblog"
 msgstr "请重制你的 Microblog 密码"
 
-#: app/auth/email.py:20 app/templates/base.html:10
+#: app/auth/email.py:20
 msgid "Welcome to Microblog"
 msgstr "欢迎来 Mircroblog"
 
@@ -139,7 +139,7 @@ msgstr "机器人"
 msgid "About me"
 msgstr "个人简介"
 
-#: app/main/forms.py:13 app/main/forms.py:29
+#: app/main/forms.py:13 app/main/forms.py:29 app/main/forms.py:34
 msgid "Submit"
 msgstr "提交"
 
@@ -151,16 +151,20 @@ msgstr "用户名已存在，请选择其他用户名。"
 msgid "Say something"
 msgstr "说点什么"
 
-#: app/main/routes.py:37
+#: app/main/forms.py:33
+msgid "Message"
+msgstr "私信"
+
+#: app/main/routes.py:42
 msgid "Your post is now live!"
 msgstr "发送成功"
 
-#: app/main/routes.py:39 app/templates/base.html:35
-#: app/templates/errors/404.html:5 app/templates/errors/500.html:5
+#: app/main/routes.py:44 app/templates/errors/404.html:5
+#: app/templates/errors/500.html:5
 msgid "Home"
 msgstr "首页"
 
-#: app/main/routes.py:52
+#: app/main/routes.py:57
 #, python-format
 msgid ""
 "You haven't signed in yet. <a href='%(login_url)s'>Login</a> or <a "
@@ -169,13 +173,21 @@ msgstr ""
 "你还没有登录呢，请 <a href='%(login_url)s'>登录</a> 或 <a "
 "href='%(register_url)s'>注册</a>。"
 
-#: app/main/routes.py:56 app/templates/base.html:36
+#: app/main/routes.py:61
 msgid "Explore"
 msgstr "广场"
 
-#: app/main/routes.py:93 app/templates/edit_profile.html:4
+#: app/main/routes.py:98 app/templates/edit_profile.html:4
 msgid "Edit Profile"
 msgstr "编辑个人资料"
+
+#: app/main/routes.py:166
+msgid "Your message has been sent."
+msgstr "信息已发送"
+
+#: app/main/routes.py:168
+msgid "Send Message"
+msgstr "发信息"
 
 #: app/templates/_pages.html:10
 msgid "Newer posts"
@@ -185,50 +197,34 @@ msgstr "新微博"
 msgid "Older posts"
 msgstr "旧微博"
 
-#: app/templates/_post.html:22
+#: app/templates/_post.html:23
 msgid "Translate"
 msgstr "翻译"
 
-#: app/templates/_post.html:29 app/templates/_post.html:32
-#: app/templates/_post.html:35 app/templates/_post.html:39
+#: app/templates/_post.html:30 app/templates/_post.html:33
+#: app/templates/_post.html:36 app/templates/_post.html:40
 msgid "This doensn't work for now"
 msgstr "这个功能现在还不能用"
 
-#: app/templates/_post.html:30
+#: app/templates/_post.html:31
 msgid "Forward"
 msgstr "转发"
 
-#: app/templates/_post.html:33
+#: app/templates/_post.html:34
 msgid "Comment"
 msgstr "评论"
 
-#: app/templates/_post.html:36
+#: app/templates/_post.html:37
 msgid "Like"
 msgstr "赞"
 
-#: app/templates/_post.html:40
+#: app/templates/_post.html:41
 msgid "Delete"
 msgstr "删除"
 
-#: app/templates/_post.html:59
+#: app/templates/_post.html:60
 msgid "Error: Could not contact server."
 msgstr "翻译失败：无法连接至翻译服务器"
-
-#: app/templates/base.html:40 app/templates/login.html:5
-msgid "Login"
-msgstr "登录"
-
-#: app/templates/base.html:41 app/templates/register.html:4
-msgid "Sign Up"
-msgstr "注册"
-
-#: app/templates/base.html:43
-msgid "Profile"
-msgstr "我"
-
-#: app/templates/base.html:44
-msgid "Logout"
-msgstr "退出登录"
 
 #: app/templates/explore.html:3
 msgid "Explore a larger world"
@@ -238,6 +234,10 @@ msgstr "发现更大的世界"
 msgid "Hello"
 msgstr "你好"
 
+#: app/templates/login.html:5
+msgid "Login"
+msgstr "登录"
+
 #: app/templates/login.html:12
 msgid "Sign up for Microblog"
 msgstr "注册 Microblog"
@@ -246,9 +246,30 @@ msgstr "注册 Microblog"
 msgid "Forgot your password?"
 msgstr "忘记密码？"
 
+#: app/templates/messages.html:3
+msgid "Messages"
+msgstr "私信"
+
+#: app/templates/messages.html:11
+msgid "Newer messages"
+msgstr "新的一页"
+
+#: app/templates/messages.html:16
+msgid "Older messages"
+msgstr "旧的一页"
+
+#: app/templates/register.html:4
+msgid "Sign Up"
+msgstr "注册"
+
 #: app/templates/reset_password.html:4
 msgid "Reset your password"
 msgstr "重置密码"
+
+#: app/templates/send_messages.html:5
+#, python-format
+msgid "send Message to %(recipient)s"
+msgstr "发信息给%(recipient)s"
 
 #: app/templates/user.html:18
 msgid "Last seen on:"
@@ -266,13 +287,27 @@ msgstr "关注"
 msgid "Edit your profile"
 msgstr "编辑个人资料"
 
-#: app/templates/user.html:24
+#: app/templates/user.html:24 app/templates/user_popup.html:19
 msgid "Follow"
 msgstr "关注"
 
-#: app/templates/user.html:26
+#: app/templates/user.html:26 app/templates/user_popup.html:23
 msgid "Unfollow"
 msgstr "取消关注"
+
+#: app/templates/user.html:29
+msgid "Send private message"
+msgstr "发私信"
+
+#: app/templates/user_popup.html:14
+#, python-format
+msgid "%(count)d followers"
+msgstr "%(count)d 个粉丝"
+
+#: app/templates/user_popup.html:15
+#, python-format
+msgid "%(count)d following"
+msgstr "%(count)d 正在关注"
 
 #: app/templates/errors/404.html:4
 msgid "We cannot find the page you're looking for"
@@ -294,4 +329,10 @@ msgstr "我们已经通知了工作人员，非常抱歉。"
 
 #~ msgid "Sign up"
 #~ msgstr ""
+
+#~ msgid "Profile"
+#~ msgstr "我"
+
+#~ msgid "Logout"
+#~ msgstr "退出登录"
 
